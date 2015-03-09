@@ -18,7 +18,6 @@
 #include "kernel/variables.h"
 #include "kernel/fcall.h"
 #include "kernel/array.h"
-#include "kernel/concat.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
 
@@ -44,11 +43,12 @@ ZEPHIR_INIT_CLASS(Tartan_Datetime) {
  *
  * Pass these parameteres when creating a new instance
  * of this Class, and they will be used as defaults.
- * e.g $obj = new jDateTime(false, true, 'Asia/Tehran');
+ * e.g $obj = new Tartan\DateTime(false, true, 'Asia/Tehran');
  * To use system defaults pass null for each one or just
  * create the object without any parameters.
  *
- * @author Aboozar Ghaffari
+ * @package Tartan
+ * @author Aboozar Ghaffari <me@tartan.pro>
  * @param convert bool Converts numbers to Farsi
  * @param jalali bool Converts date to Jalali
  * @param timezone string Timezone string
@@ -113,15 +113,20 @@ PHP_METHOD(Tartan_Datetime, say) {
 
 /**
  * Jalali to Gregorian Conversion
+ * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
  *
+ * @package Tartan
+ * @author Aboozar Ghaffari <me@tartan.pro>
+ * @param j_y integer Jalali year
+ * @param j_m integer Jalali month
+ * @param j_d integer Jalali day
  */
 PHP_METHOD(Tartan_Datetime, toGregorian) {
 
-	zval *_11;
 	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
-	zend_bool leap, _12;
+	zend_bool leap, _9;
 	zval *g_days_in_month, *j_days_in_month;
-	zval *j_y_param = NULL, *j_m_param = NULL, *j_d_param = NULL, *_0 = NULL, *_1 = NULL, *_3 = NULL, *_4 = NULL, *_5, *_6 = NULL, *_7 = NULL, *_8 = NULL, *_9 = NULL, _10, *_13;
+	zval *j_y_param = NULL, *j_m_param = NULL, *j_d_param = NULL, *_0 = NULL, *_1 = NULL, *_3 = NULL, *_4 = NULL, *_5, *_6 = NULL, *_7 = NULL, *_8 = NULL, *_10;
 	int j_y, j_m, j_d, jy, jm, jd, j_day_no, g_day_no, gy, gm, gd, i, j, a, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
@@ -244,23 +249,19 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 		if (!(i < jm)) {
 			break;
 		}
-		zephir_array_fetch_long(&_5, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 57 TSRMLS_CC);
+		zephir_array_fetch_long(&_5, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 64 TSRMLS_CC);
 		j_day_no += zephir_get_numberval(_5);
 		i++;
 	}
-	ZEPHIR_INIT_VAR(_6);
-	ZEPHIR_INIT_NVAR(_6);
-	ZVAL_LONG(_6, j_day_no);
-	zephir_var_dump(&_6 TSRMLS_CC);
 	j_day_no += jd;
 	g_day_no = (j_day_no + 79);
 	ZEPHIR_INIT_NVAR(_0);
 	ZVAL_LONG(_0, g_day_no);
 	ZEPHIR_INIT_NVAR(_3);
 	ZVAL_LONG(_3, 146097);
-	ZEPHIR_CALL_SELF(&_7, "div", &_2, _0, _3);
+	ZEPHIR_CALL_SELF(&_6, "div", &_2, _0, _3);
 	zephir_check_call_status();
-	gy = (1600 + (400 * zephir_get_numberval(_7)));
+	gy = (1600 + (400 * zephir_get_numberval(_6)));
 	g_day_no = (g_day_no % 146097);
 	leap = 1;
 	if (g_day_no >= 36525) {
@@ -269,9 +270,9 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 		ZVAL_LONG(_0, g_day_no);
 		ZEPHIR_INIT_NVAR(_3);
 		ZVAL_LONG(_3, 36524);
-		ZEPHIR_CALL_SELF(&_8, "div", &_2, _0, _3);
+		ZEPHIR_CALL_SELF(&_7, "div", &_2, _0, _3);
 		zephir_check_call_status();
-		gy += (100 * zephir_get_numberval(_8));
+		gy += (100 * zephir_get_numberval(_7));
 		g_day_no = (g_day_no % 36524);
 		if (g_day_no >= 365) {
 			g_day_no = (g_day_no + 1);
@@ -283,9 +284,9 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 	ZVAL_LONG(_0, g_day_no);
 	ZEPHIR_INIT_NVAR(_3);
 	ZVAL_LONG(_3, 1461);
-	ZEPHIR_CALL_SELF(&_8, "div", &_2, _0, _3);
+	ZEPHIR_CALL_SELF(&_7, "div", &_2, _0, _3);
 	zephir_check_call_status();
-	gy += (4 * zephir_get_numberval(_8));
+	gy += (4 * zephir_get_numberval(_7));
 	g_day_no %= 1461;
 	if (g_day_no >= 366) {
 		leap = 0;
@@ -294,35 +295,30 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 		ZVAL_LONG(_0, g_day_no);
 		ZEPHIR_INIT_NVAR(_3);
 		ZVAL_LONG(_3, 365);
-		ZEPHIR_CALL_SELF(&_9, "div", &_2, _0, _3);
+		ZEPHIR_CALL_SELF(&_8, "div", &_2, _0, _3);
 		zephir_check_call_status();
-		gy += zephir_get_numberval(_9);
+		gy += zephir_get_numberval(_8);
 		g_day_no = (g_day_no % 365);
 	}
-	ZEPHIR_SINIT_VAR(_10);
-	ZVAL_LONG(&_10, g_day_no);
-	ZEPHIR_INIT_VAR(_11);
-	ZEPHIR_CONCAT_VS(_11, &_10, "\n");
-	zend_print_zval(_11, 0);
 	i = 0;
 	j = (zephir_fast_count_int(g_days_in_month TSRMLS_CC) - 1);
 	while (1) {
 		if (!(i < j)) {
 			break;
 		}
-		_12 = i == 1;
-		if (_12) {
-			_12 = leap;
+		_9 = i == 1;
+		if (_9) {
+			_9 = leap;
 		}
-		if (_12) {
+		if (_9) {
 			a = 1;
 		} else {
 			a = 0;
 		}
-		zephir_array_fetch_long(&_5, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 103 TSRMLS_CC);
+		zephir_array_fetch_long(&_5, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 107 TSRMLS_CC);
 		if (g_day_no >= (zephir_get_numberval(_5) + a)) {
-			zephir_array_fetch_long(&_13, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 104 TSRMLS_CC);
-			g_day_no -= (zephir_get_numberval(_13) + a);
+			zephir_array_fetch_long(&_10, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 108 TSRMLS_CC);
+			g_day_no -= (zephir_get_numberval(_10) + a);
 		} else {
 			break;
 		}
@@ -349,16 +345,15 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
  */
 PHP_METHOD(Tartan_Datetime, div) {
 
-	zval *a, *b, *_0;
+	zval *a, *b, _0;
 
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &a, &b);
-
+	zephir_fetch_params(0, 2, 0, &a, &b);
 
 
-	ZEPHIR_INIT_VAR(_0);
-	div_function(_0, a, b TSRMLS_CC);
-	RETURN_MM_LONG(zephir_get_intval(_0));
+
+	ZEPHIR_SINIT_VAR(_0);
+	div_function(&_0, a, b TSRMLS_CC);
+	RETURN_LONG(zephir_get_intval(&_0));
 
 }
 

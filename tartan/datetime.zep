@@ -12,11 +12,12 @@ class Datetime
      *
      * Pass these parameteres when creating a new instance
      * of this Class, and they will be used as defaults.
-     * e.g $obj = new jDateTime(false, true, 'Asia/Tehran');
+     * e.g $obj = new Tartan\DateTime(false, true, 'Asia/Tehran');
      * To use system defaults pass null for each one or just
      * create the object without any parameters.
      *
-     * @author Aboozar Ghaffari
+     * @package Tartan
+     * @author Aboozar Ghaffari <me@tartan.pro>
      * @param convert bool Converts numbers to Farsi
      * @param jalali bool Converts date to Jalali
      * @param timezone string Timezone string
@@ -35,7 +36,13 @@ class Datetime
 
     /**
      * Jalali to Gregorian Conversion
+     * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
      *
+     * @package Tartan
+     * @author Aboozar Ghaffari <me@tartan.pro>
+     * @param j_y integer Jalali year
+     * @param j_m integer Jalali month
+     * @param j_d integer Jalali day
      */
     public static function toGregorian(int! j_y, int! j_m, int! j_d) -> array
     {
@@ -57,8 +64,6 @@ class Datetime
             let j_day_no += j_days_in_month[i];
             let i++;
         }
-
-        var_dump(j_day_no);
 
         let j_day_no += jd;
         let g_day_no = j_day_no + 79;
@@ -88,7 +93,6 @@ class Datetime
             let gy += self::div(g_day_no, 365);
             let g_day_no = g_day_no % 365;
         }
-        echo g_day_no. "\n";
 
         let i = 0;
         let j = count(g_days_in_month) - 1;
@@ -99,7 +103,7 @@ class Datetime
             } else {
                 let a = 0;
             }
-            
+
             if (g_day_no >= g_days_in_month[i] + a) {
                 let g_day_no -= g_days_in_month[i] + a;
             } else {
@@ -107,26 +111,6 @@ class Datetime
             }
             let i++;
         }
-
-
-      //   for i in range(0, count(g_days_in_month) - 1) {
-    		// if (i == 1 && leap) {
-    		// 	let a = 1;
-    		// } else {
-    		// 	let a = 0;
-    		// }
-
-    		// if (g_day_no >= g_days_in_month[i] + a) {
-    		// 	let g_day_no -= g_days_in_month[i] + a;
-    		// } else {
-    		// 	break;
-    		// }
-      //   }
-
-
-        // for ($i = 0; $g_day_no >= $g_days_in_month[$i] + ($i == 1 && $leap); $i++) {
-        //     $g_day_no -= $g_days_in_month[$i] + ($i == 1 && $leap);
-        // }
 
         let gm = i + 1;
         let gd = g_day_no + 1;
@@ -138,6 +122,6 @@ class Datetime
      */
     private static function div(var a, var b) -> int
     {
-        return (int) (a / b);
+        return intval (a / b);
     }
 }
