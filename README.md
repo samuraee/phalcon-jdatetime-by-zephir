@@ -4,8 +4,6 @@ jDatetime (Hijri Shamsi / Jalali Date) implemention as a PHP extension powered b
 
 This extension released as a part of [Tartan framework](https://github.com/tartanpro/tartan) (Extended Phalcon Framework)
 
-Inspired by jDatetime class by [jDateime](https://github.com/sallar/jDateTime) by [Sallar Kaboli](http://sallar.me) 
-
 Requirements
 ------------
 
@@ -113,8 +111,6 @@ $date->checkdate(10, 21, 1390); // Return true
 $date->checkdate(9, 31, 1390); // Return false
 ```
 
-
-
 ##Resources
 - [List of supported timezones](http://www.php.net/manual/en/timezones.php)   
 - [Project page in phpclasses.org](http://www.phpclasses.org/jdatetime)   
@@ -123,6 +119,7 @@ $date->checkdate(9, 31, 1390); // Return false
   
 [![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LXEL22GFTXTKN)
 
+Inspired by jDatetime class by [jDateime](https://github.com/sallar/jDateTime) by [Sallar Kaboli](http://sallar.me) 
 
 Original Jalali to Gregorian (and vice versa) convertor:  
 Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
