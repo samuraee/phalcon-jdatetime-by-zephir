@@ -61,7 +61,7 @@ Initializing class with parameters
 ```php
 /*
  * @package Tartan
- * @author Aboozar Ghaffari <me@tartan.pro>
+ * @author Aboozar Ghaffari
  * @param convert bool Converts numbers to Farsi/Persian
  * @param jalali bool Converts date to Jalali
  * @param timezone string Timezone string
