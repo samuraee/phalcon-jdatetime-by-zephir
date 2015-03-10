@@ -124,7 +124,7 @@ Inspired by [jDatetime](https://github.com/sallar/jDateTime) class by [Sallar Ka
 Original Jalali to Gregorian (and vice versa) convertor:  
 Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
 
-    Copyright (C) 2003-2013 Sallar Kaboli
+    Copyright (C) 2002-2014 Aboozar Ghaffari
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
