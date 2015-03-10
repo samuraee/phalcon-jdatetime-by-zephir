@@ -31,7 +31,63 @@ class Datetime
 
     public static function say()
     {
-    	var_dump(self::toGregorian(1393, 12, 18));
+    	//var_dump(self::toGregorian(1393, 12, 18));
+        var_dump(self::toJalali(2015, 03, 10));
+    }
+
+
+    /**
+     * Gregorian to Jalali Conversion
+     * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
+     */
+    public static function toJalali(g_y, g_m, g_d)
+    {
+        array g_days_in_month, j_days_in_month;
+        int gy, gm, gd, g_day_no, jy, jm, jd, j_day_no, i;
+        var j_np;
+        let g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        let j_days_in_month = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
+
+        let gy = g_y - 1600;
+        let gm = g_m - 1;
+        let gd = g_d - 1;
+
+        let g_day_no = 365 * gy + self::div(gy + 3, 4) - self::div(gy + 99, 100) + self::div(gy + 399, 400);
+
+        let i = 0;
+        while i < gm {
+            let g_day_no += g_days_in_month[i];
+            let i++;
+        }
+
+        if (gm > 1 && ((gy % 4 == 0 && gy % 100 != 0) || (gy % 400 == 0))) {
+            let g_day_no++;
+        }
+
+        let g_day_no += gd;
+        let j_day_no = g_day_no - 79;
+
+        let j_np = self::div(j_day_no, 12053);
+        let j_day_no = j_day_no % 12053;
+
+        let jy = 979 + 33 * j_np + 4 * self::div(j_day_no, 1461);
+        let j_day_no %= 1461;
+
+        if (j_day_no >= 366) {
+            let jy += self::div(j_day_no - 1, 365);
+            let j_day_no = (j_day_no - 1) % 365;
+        }
+
+        let i = 0;
+
+        while (i < 11 && j_day_no >= j_days_in_month[i]) {
+            let j_day_no -= j_days_in_month[i];
+            let i++;
+        }
+
+        let jm = i + 1;
+        let jd = j_day_no + 1;
+        return [jy, jm, jd];
     }
 
     /**

@@ -99,15 +99,215 @@ PHP_METHOD(Tartan_Datetime, say) {
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(_1);
-	ZVAL_LONG(_1, 1393);
+	ZVAL_LONG(_1, 2015);
 	ZEPHIR_INIT_VAR(_2);
-	ZVAL_LONG(_2, 12);
+	ZVAL_LONG(_2, 03);
 	ZEPHIR_INIT_VAR(_3);
-	ZVAL_LONG(_3, 18);
-	ZEPHIR_CALL_SELF(&_0, "togregorian", NULL, _1, _2, _3);
+	ZVAL_LONG(_3, 10);
+	ZEPHIR_CALL_SELF(&_0, "tojalali", NULL, _1, _2, _3);
 	zephir_check_call_status();
 	zephir_var_dump(&_0 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * Gregorian to Jalali Conversion
+ * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
+ */
+PHP_METHOD(Tartan_Datetime, toJalali) {
+
+	zend_bool _8, _9, _10, _13;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
+	int gy, gm, gd, g_day_no, jy, jm, jd, j_day_no, i, ZEPHIR_LAST_CALL_STATUS;
+	zval *g_days_in_month, *j_days_in_month;
+	zval *g_y, *g_m, *g_d, *j_np = NULL, *_0 = NULL, *_1 = NULL, *_3 = NULL, *_4 = NULL, *_5 = NULL, *_6, *_7 = NULL, *_11 = NULL, *_12 = NULL, *_14;
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 3, 0, &g_y, &g_m, &g_d);
+
+
+
+	ZEPHIR_INIT_VAR(g_days_in_month);
+	array_init_size(g_days_in_month, 16);
+	ZEPHIR_INIT_VAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 28);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(g_days_in_month, _0);
+	ZEPHIR_INIT_VAR(j_days_in_month);
+	array_init_size(j_days_in_month, 16);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 31);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 30);
+	zephir_array_fast_append(j_days_in_month, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, 29);
+	zephir_array_fast_append(j_days_in_month, _0);
+	gy = (zephir_get_numberval(g_y) - 1600);
+	gm = (zephir_get_numberval(g_m) - 1);
+	gd = (zephir_get_numberval(g_d) - 1);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, (gy + 3));
+	ZEPHIR_INIT_VAR(_3);
+	ZVAL_LONG(_3, 4);
+	ZEPHIR_CALL_SELF(&_1, "div", &_2, _0, _3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, (gy + 99));
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_LONG(_3, 100);
+	ZEPHIR_CALL_SELF(&_4, "div", &_2, _0, _3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, (gy + 399));
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_LONG(_3, 400);
+	ZEPHIR_CALL_SELF(&_5, "div", &_2, _0, _3);
+	zephir_check_call_status();
+	g_day_no = ((((365 * gy) + zephir_get_numberval(_1)) - zephir_get_numberval(_4)) + zephir_get_numberval(_5));
+	i = 0;
+	while (1) {
+		if (!(i < gm)) {
+			break;
+		}
+		zephir_array_fetch_long(&_6, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 59 TSRMLS_CC);
+		g_day_no += zephir_get_numberval(_6);
+		i++;
+	}
+	ZEPHIR_INIT_VAR(_7);
+	ZEPHIR_INIT_NVAR(_7);
+	ZVAL_LONG(_7, g_day_no);
+	zephir_var_dump(&_7 TSRMLS_CC);
+	_8 = gm > 1;
+	if (_8) {
+		_9 = (gy % 4) == 0;
+		if (_9) {
+			_9 = (gy % 100) != 0;
+		}
+		_10 = _9;
+		if (!(_10)) {
+			_10 = ((gy % 400) == 0);
+		}
+		_8 = _10;
+	}
+	if (_8) {
+		g_day_no++;
+	}
+	g_day_no += gd;
+	j_day_no = (g_day_no - 79);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, j_day_no);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_LONG(_3, 12053);
+	ZEPHIR_CALL_SELF(&j_np, "div", &_2, _0, _3);
+	zephir_check_call_status();
+	j_day_no = (j_day_no % 12053);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, j_day_no);
+	ZEPHIR_INIT_NVAR(_3);
+	ZVAL_LONG(_3, 1461);
+	ZEPHIR_CALL_SELF(&_11, "div", &_2, _0, _3);
+	zephir_check_call_status();
+	jy = ((979 + (33 * zephir_get_numberval(j_np))) + (4 * zephir_get_numberval(_11)));
+	j_day_no %= 1461;
+	if (j_day_no >= 366) {
+		ZEPHIR_INIT_NVAR(_0);
+		ZVAL_LONG(_0, (j_day_no - 1));
+		ZEPHIR_INIT_NVAR(_3);
+		ZVAL_LONG(_3, 365);
+		ZEPHIR_CALL_SELF(&_12, "div", &_2, _0, _3);
+		zephir_check_call_status();
+		jy += zephir_get_numberval(_12);
+		j_day_no = (((j_day_no - 1)) % 365);
+	}
+	i = 0;
+	while (1) {
+		_13 = i < 11;
+		if (_13) {
+			zephir_array_fetch_long(&_6, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 86 TSRMLS_CC);
+			_13 = ZEPHIR_LT_LONG(_6, j_day_no);
+		}
+		if (!(_13)) {
+			break;
+		}
+		zephir_array_fetch_long(&_14, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 87 TSRMLS_CC);
+		j_day_no -= zephir_get_numberval(_14);
+		i++;
+	}
+	jm = (i + 1);
+	jd = (j_day_no + 1);
+	array_init_size(return_value, 4);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, jy);
+	zephir_array_fast_append(return_value, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, jm);
+	zephir_array_fast_append(return_value, _0);
+	ZEPHIR_INIT_NVAR(_0);
+	ZVAL_LONG(_0, jd);
+	zephir_array_fast_append(return_value, _0);
+	RETURN_MM();
 
 }
 
@@ -249,7 +449,7 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 		if (!(i < jm)) {
 			break;
 		}
-		zephir_array_fetch_long(&_5, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 64 TSRMLS_CC);
+		zephir_array_fetch_long(&_5, j_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 127 TSRMLS_CC);
 		j_day_no += zephir_get_numberval(_5);
 		i++;
 	}
@@ -315,9 +515,9 @@ PHP_METHOD(Tartan_Datetime, toGregorian) {
 		} else {
 			a = 0;
 		}
-		zephir_array_fetch_long(&_5, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 107 TSRMLS_CC);
+		zephir_array_fetch_long(&_5, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 170 TSRMLS_CC);
 		if (g_day_no >= (zephir_get_numberval(_5) + a)) {
-			zephir_array_fetch_long(&_10, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 108 TSRMLS_CC);
+			zephir_array_fetch_long(&_10, g_days_in_month, i, PH_NOISY | PH_READONLY, "tartan/datetime.zep", 171 TSRMLS_CC);
 			g_day_no -= (zephir_get_numberval(_10) + a);
 		} else {
 			break;
