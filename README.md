@@ -1,6 +1,6 @@
-# Phalcon jDatetime
+# Phalcon jDatetime (هجری شمسی)
 
-jDatetime (Hijri Shamsi/ Jalali Date) implemention as a PHP extension powered by zephir language
+jDatetime (Hijri Shamsi / Jalali Date) implemention as a PHP extension powered by zephir language
 
 This extension released as a part of [Tartan framework](https://github.com/tartanpro/tartan) (Extended Phalcon Framework)
 
