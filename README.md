@@ -4,6 +4,8 @@ jDatetime (Hijri Shamsi / Jalali Date) implemention as a PHP extension powered b
 
 This extension released as a part of [Tartan framework](https://github.com/tartanpro/tartan) (Extended Phalcon Framework)
 
+Inspired by jDatetime class by [jDateime](https://github.com/sallar/jDateTime) by [Sallar Kaboli](http://sallar.me) 
+
 Requirements
 ------------
 
